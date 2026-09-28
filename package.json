@@ -1,0 +1,27 @@
+{
+  "name": "jobTracker",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:api": "pnpm --filter @jobTracker/api dev",
+    "dev:web": "pnpm --filter @jobTracker/web dev",
+    "db:generate": "pnpm --filter @jobTracker/api db:generate",
+    "db:push": "pnpm --filter @jobTracker/api db:push",
+    "db:studio": "pnpm --filter @jobTracker/api db:studio",
+    "build": "pnpm -r build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.3.0",
+      "onFail": "download"
+    }
+  }
+}
