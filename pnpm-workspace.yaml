@@ -1,6 +1,7 @@
 packages:
   - "api"
   - "packages/*"
+  - "web"
   - "apps/*"
 allowBuilds:
   esbuild: false
