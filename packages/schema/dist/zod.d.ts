@@ -1,9 +1,8 @@
 import z from "zod";
 export declare const insertApplicationSchema: z.ZodObject<{
-    company: z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>;
-    link: z.ZodOptional<z.ZodNullable<z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>>>;
-    role: z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>;
-    status: z.ZodOptional<z.ZodEnum<{
+    company: z.ZodString;
+    role: z.ZodString;
+    status: z.ZodEnum<{
         wishlist: "wishlist";
         applied: "applied";
         screening: "screening";
@@ -11,16 +10,14 @@ export declare const insertApplicationSchema: z.ZodObject<{
         offer: "offer";
         rejected: "rejected";
         withdrawn: "withdrawn";
-    }>>;
-    dateApplied: z.ZodNullable<z.ZodOptional<z.ZodNullable<z.ZodCoercedDate<unknown>>>>;
-    source: z.ZodOptional<z.ZodNullable<z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>>>;
-    nextAction: z.ZodOptional<z.ZodNullable<z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>>>;
-    nextActionDate: z.ZodOptional<z.ZodNullable<z.ZodDate>>;
-    notes: z.ZodOptional<z.ZodNullable<z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>>>;
-}, {
-    out: {};
-    in: {};
-}>;
+    }>;
+    dateApplied: z.ZodOptional<z.ZodNullable<z.ZodCoercedDate<unknown>>>;
+    link: z.ZodString;
+    source: z.ZodString;
+    nextAction: z.ZodString;
+    nextActionDate: z.ZodOptional<z.ZodNullable<z.ZodCoercedDate<unknown>>>;
+    notes: z.ZodString;
+}, z.core.$strip>;
 export declare const selectApplicationSchema: import("drizzle-zod").BuildSchema<"select", {
     id: import("drizzle-orm/sqlite-core").SQLiteColumn<{
         name: "id";
@@ -234,9 +231,9 @@ export declare const updateApplicationSchema: z.ZodObject<{
         rejected: "rejected";
         withdrawn: "withdrawn";
     }>;
-    nextAction: z.ZodOptional<z.ZodNullable<z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>>>;
-    nextActionDate: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodNullable<z.ZodCoercedDate<unknown>>>>>;
-    notes: z.ZodOptional<z.ZodNullable<z.ZodType<Buffer, unknown, z.core.$ZodTypeInternals<Buffer, unknown>>>>;
+    nextAction: z.ZodString;
+    nextActionDate: z.ZodOptional<z.ZodNullable<z.ZodCoercedDate<unknown>>>;
+    notes: z.ZodString;
 }, {
     out: {};
     in: {};

@@ -2,13 +2,7 @@ import { toast } from "sonner";
 import type { Application } from "@jobTracker/schema";
 import { useUpdateApplications } from "../hooks/useUpdateApplications";
 import { useDeleteApplications } from "../hooks/useDeleteApplications";
-import {
-  STATUSES,
-  fromDateInputValue,
-  statusConfig,
-  toDateInputValue,
-  type Status,
-} from "./status";
+import { STATUSES, statusConfig, toDateInputValue, fromDateInputValue } from "./status";
 
 export function UpdateApplicationForm({
   application,
@@ -44,27 +38,15 @@ export function UpdateApplicationForm({
       onSubmit={async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        const company = String(form.get("company") ?? "").trim();
-        const role = String(form.get("role") ?? "").trim();
-
-        if (!company || !role) {
-          toast.error("Company and role are required.");
-          return;
-        }
 
         try {
           await updateApplication.mutateAsync({
             id: application.id,
             updateData: {
-              company,
-              role,
-              status: (form.get("status") as Status) ?? application.status,
-              dateApplied: fromDateInputValue(form.get("dateApplied") as string) || null,
-              link: (String(form.get("link") ?? "").trim() || null) as string | null,
-              source: (String(form.get("source") ?? "").trim() || null) as string | null,
-              nextAction: (String(form.get("nextAction") ?? "").trim() || null) as string | null,
+              status: form.get("status") as Application["status"],
+              nextAction: String(form.get("nextAction") ?? "").trim(),
               nextActionDate: fromDateInputValue(form.get("nextActionDate") as string) || null,
-              notes: (String(form.get("notes") ?? "").trim() || null) as string | null,
+              notes: String(form.get("notes") ?? "").trim(),
             },
           });
           toast.success("Changes saved");
@@ -74,14 +56,12 @@ export function UpdateApplicationForm({
         }
       }}
     >
-      <input
-        name="company"
-        defaultValue={application.company}
-        required
-        autoFocus
-        className={inputClass}
-      />
-      <input name="role" defaultValue={application.role} required className={inputClass} />
+      <div className="mb-1 rounded-md bg-paper px-3 py-2 text-sm">
+        <p className="font-medium text-ink">
+          {application.role} · {application.company}
+        </p>
+      </div>
+
       <select name="status" defaultValue={application.status} className={inputClass}>
         {STATUSES.map((status) => (
           <option key={status} value={status}>
@@ -89,25 +69,6 @@ export function UpdateApplicationForm({
           </option>
         ))}
       </select>
-      <input
-        name="dateApplied"
-        type="date"
-        defaultValue={toDateInputValue(application.dateApplied)}
-        className={inputClass}
-      />
-      <input
-        name="link"
-        type="url"
-        placeholder="Listing link"
-        defaultValue={application.link ?? ""}
-        className={inputClass}
-      />
-      <input
-        name="source"
-        placeholder="Source"
-        defaultValue={application.source ?? ""}
-        className={inputClass}
-      />
       <input
         name="nextAction"
         placeholder="Next action"

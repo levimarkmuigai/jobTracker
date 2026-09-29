@@ -1,27 +1,34 @@
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import { createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { applications } from "./db";
 import z from "zod";
 
-export const insertApplicationSchema = createInsertSchema(applications, {
-  dateApplied: () => z.coerce.date().nullable().optional(),
-}).omit({
-  id: true,
-  updatedAt: true,
+const status = z.enum([
+  "wishlist",
+  "applied",
+  "screening",
+  "interviewing",
+  "offer",
+  "rejected",
+  "withdrawn",
+]);
+
+export const insertApplicationSchema = z.object({
+  company: z.string(),
+  role: z.string(),
+  status: status,
+  dateApplied: z.coerce.date().nullable().optional(),
+  link: z.string(),
+  source: z.string(),
+  nextAction: z.string(),
+  nextActionDate: z.coerce.date().nullable().optional(),
+  notes: z.string(),
 });
 export const selectApplicationSchema = createSelectSchema(applications);
 export const updateApplicationSchema = createUpdateSchema(applications, {
-  status: z.enum([
-    "wishlist",
-    "applied",
-    "screening",
-    "interviewing",
-    "offer",
-    "rejected",
-    "withdrawn",
-  ]),
-  nextAction: (schema) => schema,
-  nextActionDate: () => z.coerce.date().nullable().optional(),
-  notes: (schema) => schema,
+  status: status,
+  nextAction: z.string(),
+  nextActionDate: z.coerce.date().nullable().optional(),
+  notes: z.string(),
 })
   .omit({
     id: true,

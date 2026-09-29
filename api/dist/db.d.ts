@@ -1,0 +1,7 @@
+import Database from "better-sqlite3";
+import * as schema from "@jobTracker/schema";
+import "dotenv/config";
+export declare const db: import("drizzle-orm/better-sqlite3").BetterSQLite3Database<typeof schema> & {
+    $client: Database.Database;
+};
+//# sourceMappingURL=db.d.ts.map
