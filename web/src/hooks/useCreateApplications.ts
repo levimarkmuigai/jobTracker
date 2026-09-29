@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type ApplicationData = z.infer<typeof insertApplicationSchema>;
 
-export function useCreateProduct() {
+export function useCreateApplications() {
   const queryClient = useQueryClient();
 
   return useMutation({

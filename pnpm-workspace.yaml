@@ -4,4 +4,5 @@ packages:
   - "web"
   - "apps/*"
 allowBuilds:
+  core-js: false
   esbuild: false
