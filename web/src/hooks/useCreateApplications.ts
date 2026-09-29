@@ -9,7 +9,7 @@ export function useCreateProduct() {
 
   return useMutation({
     mutationFn: async ({ applicationData }: { applicationData: ApplicationData }) => {
-      const res = await fetch("/application", {
+      const res = await fetch("/applications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(applicationData),

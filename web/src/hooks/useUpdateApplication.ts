@@ -5,7 +5,7 @@ import type z from "zod";
 type UpdateData = z.infer<typeof updateApplicationSchema>;
 
 const updateApplications = async ({ updateData, id }: { updateData: UpdateData; id: number }) => {
-  const res = await fetch(`/applications/${id}`, {
+  const res = await fetch(`/applications/:${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updateData),

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const deleteApplication = async ({ id }: { id: number }) => {
-  const res = await fetch(`/applications/${id}`, {
+  const res = await fetch(`/applications/:${id}`, {
     method: "DELETE",
   });
 

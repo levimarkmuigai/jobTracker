@@ -51,7 +51,7 @@ export async function buildApp() {
   app.get("/health", async () => ({ status: "ok" }));
 
   app.post(
-    "/application",
+    "/applications",
     { schema: { body: insertApplicationSchema, response: { 201: selectApplicationSchema } } },
     async (request, reply) => {
       const row = await createApplication(request.body);
@@ -68,7 +68,7 @@ export async function buildApp() {
   );
 
   app.withTypeProvider<ZodTypeProvider>().patch(
-    "/application/:id",
+    "/applications/:id",
     {
       schema: {
         params: z.object({ id: z.coerce.number().int().positive() }),
@@ -84,7 +84,7 @@ export async function buildApp() {
   );
 
   app.delete(
-    "/application/:id",
+    "/applications/:id",
     { schema: { params: z.object({ id: z.coerce.number().int().positive() }) } },
     async (request, reply) => {
       const deleted = await deleteApplication(request.params.id);
