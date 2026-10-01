@@ -1,7 +1,9 @@
-api/.env
 node_modules
+apps/web
+packages/client
 api/dist
 packages/schema/dist
 api/sqlite.db
 api/sqlite.db-shm
 api/sqlite.db-wal
+api/.env

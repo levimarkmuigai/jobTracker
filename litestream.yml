@@ -1,0 +1,4 @@
+dbs:
+  - path: /app/api/data/prod.db
+    replicas:
+      - url: s3://${AWS_S3_BUCKET}/prod.db

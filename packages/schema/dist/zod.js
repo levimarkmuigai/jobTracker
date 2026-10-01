@@ -1,5 +1,5 @@
 import { createSelectSchema, createUpdateSchema } from "drizzle-zod";
-import { applications } from "./db";
+import { applications } from "./db.js";
 import z from "zod";
 const status = z.enum([
     "wishlist",
