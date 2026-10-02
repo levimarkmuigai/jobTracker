@@ -3,5 +3,6 @@ packages:
   - "packages/*"
   - "web"
 allowBuilds:
+  better-sqlite3: true
   core-js: false
   esbuild: false
