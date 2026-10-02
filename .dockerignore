@@ -1,5 +1,4 @@
 node_modules
-apps/web
 packages/client
 api/dist
 packages/schema/dist
