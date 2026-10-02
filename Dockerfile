@@ -2,6 +2,8 @@ FROM litestream/litestream:latest AS litestream
 
 FROM node:20-slim
 
+COPY --from=litestream /usr/local/bin/litestream /usr/local/bin/litestream
+
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     python3 \
