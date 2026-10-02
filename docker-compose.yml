@@ -8,7 +8,7 @@ services:
       - ./prod-data:/app/api/data
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=sqlite:///app/api/data/prod.db
+      - DATABASE_URL=sqlite:////app/api/data/prod.db
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_S3_BUCKET=${AWS_S3_BUCKET}
