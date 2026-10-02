@@ -22,7 +22,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Prepare image name
         id: prep
@@ -61,14 +61,12 @@ jobs:
           script: |
             cd /home/ubuntu/api-deployment
 
-            # Write environment variables
             echo "IMAGE=${{ needs.build-and-push.outputs.image }}:latest" > .env
             echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
             echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> .env
             echo "AWS_REGION=af-south-1" >> .env
 
-            # Authenticate with GHCR on the EC2 instance
             echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
             docker compose down
