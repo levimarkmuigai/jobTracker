@@ -1,4 +1,4 @@
 dbs:
   - path: /app/api/data/prod.db
     replicas:
-      - url: "s3://${AWS_S3_BUCKET}/prod.db?region=af-south-1&endpoint=https://s3.af-south-1.amazonaws.com"
+      - url: "s3://${AWS_S3_BUCKET}/prod.db?region=af-south-1"
