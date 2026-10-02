@@ -17,14 +17,9 @@ RUN corepack enable && corepack prepare pnpm@11.28.0 --activate
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY api/package.json ./api/
-COPY packages/schema/package.json ./packages/schema/
-COPY web/package.json ./web/
+COPY . .
 
 RUN pnpm install --frozen-lockfile
-
-COPY . .
 
 RUN pnpm --filter schema build
 RUN pnpm --filter api build
