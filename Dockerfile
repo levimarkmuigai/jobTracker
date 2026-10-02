@@ -3,7 +3,7 @@ FROM litestream/litestream:latest AS litestream
 FROM node:20-slim
 
 COPY --from=litestream /usr/local/bin/litestream /usr/local/bin/litestream
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var.lib/apt/lists/*
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -17,7 +17,7 @@ COPY packages/schema/package.json ./packages/schema/
 
 RUN pnpm install --frozen-lockfile
 
-COPY ..
+COPY . .
 
 RUN pnpm --filter schema build
 RUN pnpm --filter api build
