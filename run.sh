@@ -2,7 +2,7 @@
 set -e
 
 echo "1. Restoring database from S3 (if exists)..."
-litestream restore -config /etc/litestream.yml -if-replica-exists /app/api/data/prod.db
+litestream restore -if-replica-exists -o /app/api/data/prod.db s3://${AWS_S3_BUCKET}/prod.db
 
 echo "2. Starting Litestream replication in the background..."
 litestream replicate -config /etc/litestream.yml &
