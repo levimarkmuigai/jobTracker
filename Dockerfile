@@ -1,6 +1,6 @@
 FROM litestream/litestream:latest AS litestream
 
-FROM node:20-slim
+FROM node:26-slim
 
 COPY --from=litestream /usr/local/bin/litestream /usr/local/bin/litestream
 
