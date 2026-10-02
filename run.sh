@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
-litestream restore if-replica-exists -config /etc/litestream.yml /app/api/prod.db
+echo "1. Restoring database from S3 (if exists)..."
+litestream restore -if-replica-exists -config /etc/litestream.yml
 
-exec litestream replicate -exec "pnpm --filter api start" -config /etc/litestream.yml
+echo "2. Starting Litestream replication in the background..."
+litestream replicate -config /etc/litestream.yml &
+
+echo "3. Starting the Node.js API..."
+pnpm --filter api start
