@@ -3,7 +3,7 @@ FROM litestream/litestream:latest AS litestream
 FROM node:20-slim
 
 COPY --from=litestream /usr/local/bin/litestream /usr/local/bin/litestream
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ca-certificates python3 build-essential && rm -rf /var/lib/apt/lists/*
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -14,6 +14,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY api/package.json ./api/
 COPY packages/schema/package.json ./packages/schema/
+COPY web/package.json ./web/
 
 RUN pnpm install --frozen-lockfile
 
