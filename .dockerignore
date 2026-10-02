@@ -1,5 +1,4 @@
 node_modules
-packages/client
 api/dist
 packages/schema/dist
 api/sqlite.db
