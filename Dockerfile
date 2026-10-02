@@ -19,7 +19,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 RUN pnpm --filter schema build
 RUN pnpm --filter api build
