@@ -47,5 +47,9 @@ if ! kill -0 "$LITESTREAM_PID" 2>/dev/null; then
   exit 1
 fi
 
-echo "3. Starting the Node.js API..."
+echo "3. Running database migrations..."
+cd /app/api
+pnpm drizzle-kit migrate
+
+echo "4. Starting the Node.js API..."
 exec pnpm --filter api start
