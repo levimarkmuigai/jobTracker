@@ -66,6 +66,7 @@ jobs:
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
             echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> .env
             echo "AWS_REGION=af-south-1" >> .env
+            echo "ALLOWED_ORIGINS"=${{ secrets.ALLOWED_ORIGINS }} >> .env
 
             echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 

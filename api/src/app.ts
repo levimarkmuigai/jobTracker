@@ -46,7 +46,7 @@ export async function buildApp() {
   });
 
   await app.register(cors, {
-    origin: "http://localhost:5173",
+    origin: process.env.ALLOWED_ORIGINS ?? "http://localhost:5173",
   });
 
   app.get("/health", async () => ({ status: "ok" }));
