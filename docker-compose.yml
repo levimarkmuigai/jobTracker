@@ -1,22 +1,8 @@
 services:
-  migrate:
-    image: ${IMAGE}
-    profiles: ["migrate"]
-    command: pnpm --filter @jobTracker/api exec drizzle-kit push
-    volumes:
-      - ./prod-data:/app/api/data
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=/app/api/data/prod.db
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
-      - AWS_REGION=${AWS_REGION:-af-south-1}
-
   api:
     image: ${IMAGE}
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     restart: always
     volumes:
       - ./prod-data:/app/api/data
