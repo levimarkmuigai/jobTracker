@@ -29,11 +29,11 @@ export function CreateApplicationForm({ onClose }: { onClose: () => void }) {
               role,
               status: (form.get("status") as Status) ?? "applied",
               dateApplied: fromDateInputValue(form.get("dateApplied") as string),
-              link: (String(form.get("link") ?? "").trim() || null) as string | null,
-              source: (String(form.get("source") ?? "").trim() || null) as string | null,
-              nextAction: null,
+              link: String(form.get("link") ?? "").trim(),
+              source: String(form.get("source") ?? "").trim(),
+              nextAction: "",
               nextActionDate: null,
-              notes: (String(form.get("notes") ?? "").trim() || null) as string | null,
+              notes: String(form.get("notes") ?? "").trim(),
             },
           });
           toast.success(`Added ${company}`);
